@@ -15,7 +15,7 @@ const pkg = require("./package.json");
 const tsConfig = require("./tsconfig.json");
 
 const outDirName = tsConfig.compilerOptions.outDir.replace("./", "");
-const pollInterval = 500;
+const pollInterval = 300;
 
 module.exports = (env) => {
     const mode = env.prod ? "production" : "development";
@@ -32,6 +32,7 @@ module.exports = (env) => {
         },
         target: "node",
         devtool: withHMR ? "inline-cheap-module-source-map" : "source-map",
+        devServer: { hot: withHMR },
         externals: [
             nodeExternals({
                 whitelist: [`webpack/hot/poll?${pollInterval}`],
