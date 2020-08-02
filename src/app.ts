@@ -33,7 +33,6 @@ export async function makeApp(connection: Connection) {
     const app = new Koa();
     await connection.synchronize(true);
     logger.info("Starting Koa server...");
-    console.log("oui");
 
     app.use(bodyParser());
     app.use(logRequest(logger));
