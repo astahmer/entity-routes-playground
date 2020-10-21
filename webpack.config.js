@@ -20,7 +20,7 @@ const pollInterval = 300;
 module.exports = (env) => {
     const mode = env.prod ? "production" : "development";
     const isDev = mode === "development";
-    const withHMR = env.hmr;
+    const withHMR = env.hmr || env.localdev;
 
     return {
         mode,
@@ -40,9 +40,7 @@ module.exports = (env) => {
         resolve: {
             extensions: [".tsx", ".ts", ".js"],
             plugins: [new TsconfigPathsPlugin()],
-            alias: {
-                "@astahmer/entity-routes": path.resolve(__dirname, "../entity-routes/dist"),
-            },
+            alias: env.localdev ? { "@astahmer/entity-routes": path.resolve(__dirname, "../entity-routes/dist") } : {},
         },
         plugins: [new webpack.EnvironmentPlugin({ NODE_ENV: mode }), new CleanWebpackPlugin()].concat(
             withHMR ? [new webpack.HotModuleReplacementPlugin()] : [],

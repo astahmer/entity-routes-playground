@@ -9,6 +9,7 @@
         "start-docker": "node --inspect=0.0.0.0:9230 -r ts-node/register dist/index",
         "start": "node --inspect=9231 -r ts-node/register dist/index",
         "dev": "webpack --env.hmr",
+        "localdev": "webpack --env.localdev",
         "build": "webpack --env.prod",
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
         "t:mg": "npm run typeorm -- migration:generate -n"
@@ -17,6 +18,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@astahmer/entity-routes": "^0.1.6",
         "class-validator": "^0.12.2",
         "consola": "^2.14.0",
         "dotenv": "^8.2.0",
