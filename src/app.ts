@@ -1,22 +1,15 @@
 import * as Koa from "koa";
 import * as consola from "consola";
 import * as bodyParser from "koa-bodyparser";
-// import * as Router from "koa-router";
 
 import { Connection, createConnection, getConnectionOptions } from "typeorm";
 
 import { getOrmConfig } from "./ormconfig";
-import { Article, Comment, Role, Image, Upvote, User } from "@/entity/index";
 import { makeKoaEntityRouters, setEntityValidatorsDefaultOption } from "@astahmer/entity-routes";
-import { testingThings } from "@/functions/testing";
 import { logRequest } from "@/middlewares/logRequest";
+import { Article, User, Role, Comment, Image, Upvote } from "./entity";
 
 const logger = consola.default;
-
-declare const module: any;
-if (module.hot) {
-    module.hot.accept(console.log);
-}
 
 /** Creates connection and returns it */
 export async function createConnectionToDatabase() {
@@ -37,11 +30,9 @@ export async function makeApp(connection: Connection) {
     app.use(bodyParser());
     app.use(logRequest(logger));
 
-    //
-    testingThings();
-
     const entities = connection.entityMetadatas.map((meta) => meta.target) as Function[];
     const bridgeRouters = await makeKoaEntityRouters({ connection, entities });
+
     // Register all routes on koa server
     bridgeRouters.forEach((router) => app.use(router.instance.routes()));
 

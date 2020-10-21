@@ -3,7 +3,7 @@ import { AbstractEntity, Article, Role } from "@/entity/index";
 import { EntityRoute, CRUD_OPERATIONS, Search } from "@astahmer/entity-routes";
 
 @Search({ all: true })
-@EntityRoute({ operations: CRUD_OPERATIONS })
+@EntityRoute({ path: "/users", operations: CRUD_OPERATIONS })
 @Entity()
 export class User extends AbstractEntity {
     @Column()

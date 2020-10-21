@@ -10,7 +10,7 @@
         "sourceMap": true,
         "declaration": true,
         "noUnusedParameters": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "baseUrl": "./",
         "paths": {
             "@/*": ["./src/*"],

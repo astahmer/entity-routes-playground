@@ -40,6 +40,9 @@ module.exports = (env) => {
         resolve: {
             extensions: [".tsx", ".ts", ".js"],
             plugins: [new TsconfigPathsPlugin()],
+            alias: {
+                "@astahmer/entity-routes": path.resolve(__dirname, "../entity-routes/dist"),
+            },
         },
         plugins: [new webpack.EnvironmentPlugin({ NODE_ENV: mode }), new CleanWebpackPlugin()].concat(
             withHMR ? [new webpack.HotModuleReplacementPlugin()] : [],

@@ -8,6 +8,9 @@ import { createConnectionToDatabase, makeApp } from "./app";
 const logger = console;
 
 declare const module: any;
+if (module.hot) {
+    module.hot.accept(console.log);
+}
 
 init();
 
