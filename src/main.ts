@@ -3,6 +3,7 @@ import "reflect-metadata";
 
 import { Connection } from "typeorm";
 import { Server } from "http";
+import next from "next";
 
 import { createConnectionToDatabase, makeApp } from "./app";
 const logger = console;
@@ -36,7 +37,9 @@ async function startServer() {
     }
 
     try {
-        server = await makeApp(connection);
+        const app = next({ dev: true });
+        await app.prepare();
+        server = await makeApp(connection, app);
     } catch (error) {
         logger.error(error);
     }

@@ -7,3 +7,4 @@ jest_*
 coverage
 var
 ormlogs.log
+.next
